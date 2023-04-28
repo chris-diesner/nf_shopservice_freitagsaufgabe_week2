@@ -46,4 +46,8 @@ public class Product {
                 ", price=" + price +
                 '}';
     }
+
+    public Object getId() {
+       return this.idProduct;
+    }
 }
