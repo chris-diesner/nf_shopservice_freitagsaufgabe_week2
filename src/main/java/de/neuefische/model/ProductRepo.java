@@ -1,28 +1,25 @@
 package de.neuefische.model;
 
-import de.neuefische.model.Product;
-
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ProductRepo {
-    private ArrayList<Product> productMap = new ArrayList<>();
+    private Map<String, Product> productMap = new HashMap<>();
 
-    public ArrayList<Product> getProductMap() {
-        return productMap;
+    public ProductRepo() {
     }
 
-    public void setProductMap(ArrayList<Product> productMap) {
+    public ProductRepo(Map<String, Product> productMap) {
         this.productMap = productMap;
     }
 
-    public Product getById(String id) throws ProductNotFoundException {
-        for (Product product : this.productMap) {
-            if (product.getId().equals(id))
-                return product;
-        }
-        throw new ProductNotFoundException("product with ID " + id + " not found");
+    public Product getProductById(String idProduct) throws ProductNotFoundException {
+        if (productMap.containsKey(idProduct))
+            return productMap.get(idProduct);
+
+        throw new ProductNotFoundException("product with ID " + idProduct + " not found");
     }
 
     @Override
@@ -33,7 +30,15 @@ public class ProductRepo {
     }
 
     public Product addProduct(Product product) {
-        this.productMap.add(product);
-        return product;
+        this.productMap.put(product.getIdProduct(), product);
+        return productMap.get(product.getIdProduct());
+    }
+
+    public List<Product> getProductList() {
+        List<Product> productList = new ArrayList<>();
+        for(Product products : productMap.values()) {
+            productList.add(products);
+        }
+        return productList;
     }
 }

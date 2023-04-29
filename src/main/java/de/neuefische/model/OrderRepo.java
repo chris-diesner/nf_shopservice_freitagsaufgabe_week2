@@ -1,9 +1,8 @@
 package de.neuefische.model;
 
-import de.neuefische.model.Order;
-import de.neuefische.model.OrderNotFoundException;
-
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class OrderRepo {
@@ -13,13 +12,6 @@ public class OrderRepo {
         this.orderMap = orderMap;
     }
 
-    public Map<String, Order> getOrderMap() {
-        return orderMap;
-    }
-
-    public void setOrderMap(Map<String, Order> orderMap) {
-        this.orderMap = orderMap;
-    }
 
     @Override
     public String toString() {
@@ -28,7 +20,7 @@ public class OrderRepo {
                 '}';
     }
 
-    public Order getById(String id) throws OrderNotFoundException {
+    public Order getOrderById(String id) throws OrderNotFoundException {
         if (this.orderMap.containsKey(id)) {
             return orderMap.get(id);
         }
@@ -42,11 +34,17 @@ public class OrderRepo {
     public OrderRepo() {
     }
 
-    public void list() {
-        //output
+    public Order addOrder(Order order) throws InvalidProductException{
+        //
+        this.orderMap.put(order.getIdOrder(), order);
+        return orderMap.get(order.getIdOrder());
     }
 
-    public void add(){
-        //
+    public List<Order> getOrderList() {
+        List<Order> orderList = new ArrayList<>();
+        for (Order order : orderMap.values()) {
+            orderList.add(order);
+        }
+        return orderList;
     }
 }

@@ -47,7 +47,4 @@ public class Product {
                 '}';
     }
 
-    public Object getId() {
-       return this.idProduct;
-    }
 }
