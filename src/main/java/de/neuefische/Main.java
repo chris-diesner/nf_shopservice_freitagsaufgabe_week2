@@ -29,7 +29,7 @@ public class Main {
         myOrderMap.put(p1.getIdProduct(), p1);
         myOrderMap.put(p4.getIdProduct(), p4);
 
-        Order o1 = new Order("001", myOrderMap);
+        Order o1 = new Order("001", myOrderMap, OrderStatus.RECEIVED);
 
         try {
             myShopService.addOrder(o1);
@@ -40,6 +40,8 @@ public class Main {
         //testing outputs
         System.out.println(myShopService.listProducts());
         System.out.println(myShopService.listOrders());
+
+
 
 
 

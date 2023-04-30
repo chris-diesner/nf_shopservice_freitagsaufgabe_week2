@@ -7,11 +7,20 @@ import java.util.Map;
 
 public class OrderRepo {
     private Map<String, Order> orderMap = new HashMap<>();
+    private OrderStatus orderStatus;
 
-    public OrderRepo(Map<String, Order> orderMap) {
+    public OrderRepo(Map<String, Order> orderMap, OrderStatus orderStatus) {
         this.orderMap = orderMap;
+        this.orderStatus = orderStatus;
     }
 
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
+    }
 
     @Override
     public String toString() {
