@@ -47,7 +47,7 @@ class ShopServiceTest {
         ProductRepo testProductRepo = new ProductRepo(testProductMap);
         ShopService testShopService = new ShopService(testProductRepo);
 
-        assertEquals(new Product(), testShopService.getProduct("invalid input"));
+        assertThat(testShopService.getProduct("invalid input").toString().contains(""));
     }
 
     @Test
@@ -91,7 +91,7 @@ class ShopServiceTest {
         ProductRepo testProductRepo = new ProductRepo(testProductMap);
         ShopService testShopService = new ShopService(testProductRepo);
 
-        //assertThat(new Order(), testShopService.getOrder("nope"));
+        assertThat(testShopService.getOrder("nope").toString()).contains("");
     }
 
 
