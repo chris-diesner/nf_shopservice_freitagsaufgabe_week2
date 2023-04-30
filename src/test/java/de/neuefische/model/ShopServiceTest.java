@@ -74,14 +74,14 @@ class ShopServiceTest {
         ProductRepo testProductRepo = new ProductRepo(testProductMap);
         ShopService testShopService = new ShopService(testProductRepo);
         testProductMap.put(p1.getIdProduct(), p1);
-        Order testOrder = new Order("001", testProductMap);
+        Order testOrder = new Order("001", testProductMap, OrderStatus.RECEIVED);
 
         try {
             testShopService.addOrder(testOrder);
         } catch (InvalidProductException | OrderNotFoundException e){
             System.out.println(e.getMessage());
         }
-        assertEquals("Order{id='001', productOrderMap={1=Product{id='1', name='Der Planer', price=9.99}}}\n", testShopService.listOrders());
+        assertEquals("Order{id='001', productOrderMap={1=Product{id='1', name='Der Planer', price=9.99}}, orderStatus=RECEIVED}\n", testShopService.listOrders());
     }
 
     @Test
@@ -93,21 +93,6 @@ class ShopServiceTest {
         assertEquals(new Order(), testShopService.getOrder("nope"));
     }
 
-    /*@Test
-    void getOrder_returnOrderForValidInput() throws OrderNotFoundException {
-        Map<String, Product> testProductMap = new HashMap<>();
-        testProductMap.put(p1.getIdProduct(), p1);
-        ProductRepo testProductRepo = new ProductRepo(testProductMap);
-        ShopService testShopService = new ShopService(testProductRepo);
-        Order testOrder = new Order("001", testProductMap);
-
-        try {
-            testShopService.getOrder(testOrder);
-        } catch (InvalidProductException e) {
-            System.out.println(e.getMessage());
-        }
-        assertEquals(testOrder, testShopService.getOrder(testOrder.getIdOrder()));
-    }*/
 
     @Test
     void addOrder_returnThisOrder() {
@@ -115,7 +100,7 @@ class ShopServiceTest {
         testProductMap.put(p1.getIdProduct(), p1);
         ProductRepo testProductRepo = new ProductRepo(testProductMap);
         ShopService testShopService = new ShopService(testProductRepo);
-        Order testOrder = new Order("001", testProductMap);
+        Order testOrder = new Order("001", testProductMap, OrderStatus.RECEIVED);
 
         Order actual = new Order();
         try {
